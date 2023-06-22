@@ -1,0 +1,44 @@
+{
+  "matches": [
+    {
+      "id": 1,
+      "team1": 1,
+      "team2": 2,
+      "wholeMatch": [1, 6, 2, 7, 1, 1, 3, 3, 6, 3, 4, 3],
+      "tossWinner": 1,
+      "firstBowl": 1
+    }
+  ],
+  "teams": [
+    {
+      "id": 1,
+      "name": "Bangladesh",
+      "flagUrl": "https://www.worldometers.info/img/flags/bg-flag.gif"
+    },
+    {
+      "id": 2,
+      "name": "India",
+      "flagUrl": "https://www.worldometers.info/img/flags/in-flag.gif"
+    },
+    {
+      "id": 3,
+      "name": "Pakistan",
+      "flagUrl": "https://www.worldometers.info/img/flags/pk-flag.gif"
+    },
+    {
+      "id": 4,
+      "name": "England",
+      "flagUrl": "https://www.worldometers.info/img/flags/uk-flag.gif"
+    },
+    {
+      "id": 5,
+      "name": "Sri Lanka",
+      "flagUrl": "https://www.worldometers.info/img/flags/ce-flag.gif"
+    },
+    {
+      "id": 6,
+      "name": "Australia",
+      "flagUrl": "https://www.worldometers.info/img/flags/as-flag.gif"
+    }
+  ]
+}
