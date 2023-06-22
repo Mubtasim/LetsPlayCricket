@@ -18,13 +18,16 @@ const Toss = () => {
 
   const addMatch = async (newMatch) => {
     try {
-      const response = await fetch('http://localhost:3001/matches', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(newMatch),
-      });
+      const response = await fetch(
+        'https://cricket-service-1f7n.onrender.com/matches',
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(newMatch),
+        }
+      );
 
       if (!response.ok) {
         throw new Error('Failed to add match');
@@ -62,14 +65,18 @@ const Toss = () => {
   useEffect(() => {
     const fetchCountryFlags = async () => {
       try {
-        const response = await fetch('http://localhost:3001/teams');
+        const response = await fetch(
+          'https://cricket-service-1f7n.onrender.com/teams'
+        );
         const data = await response.json();
         const flagUrl1 = data.find((team) => team.id === country1)?.flagUrl;
         const flagUrl2 = data.find((team) => team.id === country2)?.flagUrl;
         setCountry1FlagUrl(flagUrl1 || '');
         setCountry2FlagUrl(flagUrl2 || '');
 
-        const matchesResponse = await fetch('http://localhost:3001/matches');
+        const matchesResponse = await fetch(
+          'https://cricket-service-1f7n.onrender.com/matches'
+        );
         const matchesData = await matchesResponse.json();
         let max = 0;
         matchesData.forEach((match) => {

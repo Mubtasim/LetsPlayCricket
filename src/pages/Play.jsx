@@ -17,7 +17,9 @@ const Play = () => {
     // Fetch the match data based on the provided ID
     const fetchMatchData = async () => {
       try {
-        const response = await fetch(`http://localhost:3001/matches/${id}`);
+        const response = await fetch(
+          `https://cricket-service-1f7n.onrender.com/matches/${id}`
+        );
         const data = await response.json();
         setMatchData(data);
 
@@ -28,13 +30,13 @@ const Play = () => {
         setTotalRun(currentTotalRun);
 
         const team1Response = await fetch(
-          `http://localhost:3001/teams/${data.team1}`
+          `https://cricket-service-1f7n.onrender.com/teams/${data.team1}`
         );
         const team1Data = await team1Response.json();
         setTeam1(team1Data);
 
         const team2Response = await fetch(
-          `http://localhost:3001/teams/${data.team2}`
+          `https://cricket-service-1f7n.onrender.com/teams/${data.team2}`
         );
         const team2Data = await team2Response.json();
         setTeam2(team2Data);
@@ -68,13 +70,16 @@ const Play = () => {
       };
       setTotalRun(totalRun + run);
 
-      const response = await fetch(`http://localhost:3001/matches/${id}`, {
-        method: 'PATCH',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(updatedMatchData),
-      });
+      const response = await fetch(
+        `https://cricket-service-1f7n.onrender.com/matches/${id}`,
+        {
+          method: 'PATCH',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(updatedMatchData),
+        }
+      );
 
       if (response.ok) {
         setMatchData(updatedMatchData);

@@ -9,7 +9,9 @@ const Home = () => {
   useEffect(() => {
     const fetchCountries = async () => {
       try {
-        const response = await fetch('http://localhost:3001/teams');
+        const response = await fetch(
+          'https://cricket-service-1f7n.onrender.com/teams'
+        );
         const data = await response.json();
         setCountries(data);
       } catch (error) {

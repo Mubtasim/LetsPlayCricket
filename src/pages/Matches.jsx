@@ -6,7 +6,9 @@ const Matches = () => {
 
   const fetchMatches = async () => {
     try {
-      const response = await fetch(`http://localhost:3001/matches`);
+      const response = await fetch(
+        `https://cricket-service-1f7n.onrender.com/matches`
+      );
       const data = await response.json();
       setAllMatches(data);
     } catch (error) {
@@ -17,9 +19,12 @@ const Matches = () => {
   const deleteHandler = async (id) => {
     try {
       try {
-        const response = await fetch(`http://localhost:3001/matches/${id}`, {
-          method: 'DELETE',
-        });
+        const response = await fetch(
+          `https://cricket-service-1f7n.onrender.com/matches/${id}`,
+          {
+            method: 'DELETE',
+          }
+        );
         if (response.ok) {
           console.log('Match deleted successfully');
           // Perform any additional actions after successful deletion

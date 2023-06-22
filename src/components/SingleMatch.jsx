@@ -12,13 +12,13 @@ const SingleMatch = ({ match, deleteHandler }) => {
       const team1Id = match.team1;
       const team2Id = match.team2;
       const team1Response = await fetch(
-        `http://localhost:3001/teams/${team1Id}`
+        `https://cricket-service-1f7n.onrender.com/teams/${team1Id}`
       );
       const team1Data = await team1Response.json();
       setTeam1(team1Data);
 
       const team2Response = await fetch(
-        `http://localhost:3001/teams/${team2Id}`
+        `https://cricket-service-1f7n.onrender.com/teams/${team2Id}`
       );
       const team2Data = await team2Response.json();
       setTeam2(team2Data);
