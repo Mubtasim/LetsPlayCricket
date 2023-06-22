@@ -8,6 +8,10 @@ const Play = () => {
   const [matchOver, setMatchOver] = useState(false);
   const [matchData, setMatchData] = useState(null);
   const [bowlCount, setBowlCount] = useState(0);
+  const [team1, setTeam1] = useState(null);
+  const [team2, setTeam2] = useState(null);
+  const [tossWinner, setTossWinner] = useState(null);
+  const [totalRun, setTotalRun] = useState(0);
 
   useEffect(() => {
     // Fetch the match data based on the provided ID
@@ -16,6 +20,32 @@ const Play = () => {
         const response = await fetch(`http://localhost:3001/matches/${id}`);
         const data = await response.json();
         setMatchData(data);
+
+        let currentTotalRun = 0;
+        data.wholeMatch.forEach((run) => {
+          currentTotalRun += run;
+        });
+        setTotalRun(currentTotalRun);
+
+        const team1Response = await fetch(
+          `http://localhost:3001/teams/${data.team1}`
+        );
+        const team1Data = await team1Response.json();
+        setTeam1(team1Data);
+
+        const team2Response = await fetch(
+          `http://localhost:3001/teams/${data.team2}`
+        );
+        const team2Data = await team2Response.json();
+        setTeam2(team2Data);
+
+        if (team1Data.id === data.tossWinner) setTossWinner(team1Data);
+        else setTossWinner(team2Data);
+
+        if (data.wholeMatch.length === 12) {
+          setMatchOver(true);
+        }
+        setBowlCount(data.wholeMatch.length);
       } catch (error) {
         console.error('Error fetching match data:', error);
       }
@@ -36,6 +66,7 @@ const Play = () => {
         ...matchData,
         wholeMatch: [...matchData.wholeMatch, run],
       };
+      setTotalRun(totalRun + run);
 
       const response = await fetch(`http://localhost:3001/matches/${id}`, {
         method: 'PATCH',
@@ -61,41 +92,72 @@ const Play = () => {
   };
 
   const getRandomRun = () => {
-    return Math.floor(Math.random() * 6) + 1;
+    const runs = [1, 2, 3, 4, 6];
+    return runs[Math.floor(Math.random() * 5)];
   };
 
   return (
-    <div>
-      <h1>Lets Play Cricket</h1>
-      <p>Match ID: {id}</p>
+    <div className='p-5 flex flex-col items-center justify-center'>
+      <h1 className='text-3xl mb-4'>Lets Play Cricket</h1>
+      {/* <p>Match ID: {id}</p> */}
       <p>
-        {matchData && (
+        {team1 && team2 && (
           <>
-            {matchData.team1} vs {matchData.team2}
+            <span className='font-semibold'>{team1.name}</span> vs{' '}
+            <span className='font-semibold'>{team2.name}</span>
           </>
         )}
       </p>
-      <table>
+      <p>
+        {tossWinner && (
+          <>
+            <span className='font-semibold'>{tossWinner.name}</span> has won the
+            toss and elected to bowl first
+          </>
+        )}
+      </p>
+      <p>
+        {totalRun && (
+          <>
+            Total Run: <span className='font-semibold'>{totalRun}</span>
+          </>
+        )}
+      </p>
+      {matchOver && <p>Match Finished Welldone</p>}
+      {!matchOver && bowlCount < 12 && (
+        <button
+          onClick={handleBowl}
+          className='my-4 bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded text-sm'
+        >
+          Bowl
+        </button>
+      )}
+      {matchOver && (
+        <button className='my-4 bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded text-sm'>
+          Full Score
+        </button>
+      )}
+      <table className='w-full bg-white border border-gray-200 divide-y divide-gray-200'>
         <thead>
           <tr>
-            <th>Over</th>
-            <th>Run</th>
+            <th className='px-4 py-2 text-left'>Over</th>
+            <th className='px-4 py-2 text-left'>Run</th>
           </tr>
         </thead>
         <tbody>
           {matchData &&
             matchData.wholeMatch.map((run, index) => (
               <tr key={index}>
-                <td>{index + 1}</td>
-                <td>{run}</td>
+                <td className='px-4 py-2'>
+                  {Math.floor(index / 6)}.{(index % 6) + 1}
+                </td>
+                <td className='px-4 py-2'>{run}</td>
               </tr>
             ))}
         </tbody>
       </table>
-      {!matchOver && bowlCount < 12 && (
-        <button onClick={handleBowl}>Bowl</button>
-      )}
-      {matchOver && <p>The match is over</p>}
+
+      {/* {matchOver && <p>The match is over</p>} */}
     </div>
   );
 };

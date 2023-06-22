@@ -26,12 +26,42 @@
       "team1": 1,
       "team2": 6,
       "wholeMatch": [
-        5,
+        6,
+        1,
+        2,
+        4,
+        4,
+        2,
+        2,
+        1,
+        4,
+        4,
         3,
         1
       ],
       "tossWinner": 6,
       "firstBowl": 6
+    },
+    {
+      "id": 3,
+      "team1": 4,
+      "team2": 5,
+      "wholeMatch": [
+        6,
+        1,
+        4,
+        1,
+        6,
+        1,
+        2,
+        2,
+        6,
+        6,
+        2,
+        3
+      ],
+      "tossWinner": 5,
+      "firstBowl": 5
     }
   ],
   "teams": [
