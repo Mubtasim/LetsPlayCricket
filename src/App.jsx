@@ -6,11 +6,13 @@ import Play from './pages/Play';
 import Matches from './pages/Matches';
 import SingleMatch from './components/SingleMatch';
 import MatchDetails from './pages/MatchDetails';
+import NavBar from './components/NavBar';
 
 function App() {
   return (
     <div>
       <BrowserRouter>
+        <NavBar />
         <Routes>
           <Route path='/' element={<Home />} />
           <Route path='/toss' element={<Toss />} />
