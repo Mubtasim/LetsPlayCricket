@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const SingleMatch = ({ match, deleteHandler }) => {
   const [team1, setTeam1] = useState(null);
@@ -8,7 +8,6 @@ const SingleMatch = ({ match, deleteHandler }) => {
 
   const fetchTeams = async () => {
     try {
-      console.log('match', match);
       const team1Id = match.team1;
       const team2Id = match.team2;
       const team1Response = await fetch(
@@ -36,7 +35,7 @@ const SingleMatch = ({ match, deleteHandler }) => {
   }, []);
 
   return (
-    <div className='flex items-center justify-center gap-4'>
+    <div className="flex items-center justify-center gap-4">
       {team1 && team2 && (
         <p>
           {team1.name} vs {team2.name}
@@ -45,7 +44,7 @@ const SingleMatch = ({ match, deleteHandler }) => {
       {match && (
         <button
           onClick={() => detailsHandler(match.id)}
-          className='my-4 bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded text-sm'
+          className="my-4 bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded text-sm"
         >
           Details
         </button>
@@ -53,7 +52,7 @@ const SingleMatch = ({ match, deleteHandler }) => {
       {match && (
         <button
           onClick={() => deleteHandler(match.id)}
-          className='my-4 bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded text-sm'
+          className="my-4 bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded text-sm"
         >
           X
         </button>

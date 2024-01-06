@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import SingleMatch from '../components/SingleMatch';
+import React, { useEffect, useState } from "react";
+import SingleMatch from "../components/SingleMatch";
 
 const Matches = () => {
   const [allMatches, setAllMatches] = useState(null);
@@ -22,14 +22,14 @@ const Matches = () => {
         const response = await fetch(
           `https://cricket-service-1f7n.onrender.com/matches/${id}`,
           {
-            method: 'DELETE',
+            method: "DELETE",
           }
         );
         if (response.ok) {
-          console.log('Match deleted successfully');
+          console.log("Match deleted successfully");
           // Perform any additional actions after successful deletion
         } else {
-          console.log('Failed to delete the match');
+          console.log("Failed to delete the match");
         }
         fetchMatches();
       } catch (error) {
@@ -45,14 +45,14 @@ const Matches = () => {
   }, []);
 
   return (
-    <div className='p-5 flex flex-col items-center h-screen justify-center'>
-      <h1 className='text-3xl mb-4'>All Match List</h1>
+    <div className="p-5 flex flex-col items-center h-screen justify-center">
+      <h1 className="text-3xl mb-4">All Match List</h1>
       <div>
         {allMatches &&
-          allMatches.map((match, idx) => {
+          allMatches.map((match) => {
             return (
               <SingleMatch
-                key={idx}
+                key={match.id}
                 match={match}
                 deleteHandler={deleteHandler}
               />
